@@ -65,9 +65,9 @@ function compressVideo() {
       progressBar.style.width = "0%";
       message.innerText = "Something went wrong. Please try again.";
     });
-  document.addEventListener("DOMContentLoaded", () => {
-    document
-      .getElementById("compressBtn")
-      .addEventListener("click", compressVideo);
-  });
 }
+document.addEventListener("DOMContentLoaded", () => {
+  document
+    .getElementById("compressBtn")
+    .addEventListener("click", compressVideo);
+});
