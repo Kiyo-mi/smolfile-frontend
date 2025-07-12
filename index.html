@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smol File</title>
+
+    <!-- SEO Meta Tags -->
+    <meta
+      name="description"
+      content="Smol File is a cute and simple web app that compresses videos from Instagram, Twitter, and more into files under 10MB — perfect for Discord sharing."
+    />
+    <meta
+      name="keywords"
+      content="Discord video compressor, 10MB file limit, compress video for Discord, Discord Nitro limit, free video compression tool, smol file"
+    />
+    <meta name="author" content="Smol File Team" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://your-domain.com" />
+
+    <!-- Open Graph Tags (for Facebook, LinkedIn, etc.) -->
+    <meta
+      property="og:title"
+      content="Smol File – Make it smol. Send it fast."
+    />
+    <meta
+      property="og:description"
+      content="Paste your video link, click a button, and download a cute smol version ready to share on Discord. Compress to 10MB instantly."
+    />
+    <meta
+      property="og:image"
+      content="https://your-domain.com/preview-image.png"
+    />
+    <meta property="og:url" content="https://your-domain.com" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Smol File – Compress videos under 10MB"
+    />
+    <meta
+      name="twitter:description"
+      content="Turn big videos into smol ones with one click. Designed for Discord users who hit that 10MB wall."
+    />
+    <meta
+      name="twitter:image"
+      content="https://your-domain.com/preview-image.png"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        font-family: "Quicksand", sans-serif;
+        background: #fffafc;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        min-height: 100vh;
+        padding: 2rem;
+        color: #333;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+        animation: floatLogo 3s ease-in-out infinite;
+      }
+
+      .logo img {
+        width: 100px;
+        height: auto;
+        filter: drop-shadow(0 0 10px rgba(198, 186, 255, 0.7));
+      }
+
+      @keyframes floatLogo {
+        0% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      .taglines {
+        font-size: 1.1rem;
+        color: #777;
+        margin-bottom: 2rem;
+        text-align: center;
+        max-width: 400px;
+        animation: fadeTaglines 10s infinite;
+      }
+
+      @keyframes fadeTaglines {
+        0% {
+          opacity: 1;
+        }
+        33% {
+          opacity: 0;
+        }
+        66% {
+          opacity: 1;
+        }
+      }
+
+      .input-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+        max-width: 500px;
+      }
+
+      input[type="text"] {
+        padding: 0.75rem 1rem;
+        border-radius: 12px;
+        border: 2px solid #d1c5ff;
+        font-size: 1rem;
+        outline: none;
+      }
+
+      button {
+        background-color: #c6baff; /* branding lavender color */
+        color: #fff;
+        font-size: 1.1rem;
+        padding: 0.7rem;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        font-weight: bold;
+      }
+
+      button:hover {
+        background-color: #b89ef8; /* slightly darker lavender */
+      }
+
+      .progress {
+        margin-top: 1.5rem;
+        width: 100%;
+        max-width: 500px;
+        background: #eee;
+        border-radius: 20px;
+        overflow: hidden;
+      }
+
+      .progress-bar {
+        height: 20px;
+        background: #c6baff;
+        width: 0%;
+        transition: width 0.4s ease;
+      }
+
+      .message {
+        margin-top: 1rem;
+        font-size: 1rem;
+        color: #888;
+        text-align: center;
+      }
+
+      .download-link {
+        margin-top: 1.5rem;
+        font-size: 1.1rem;
+        background: #c6baff;
+        padding: 0.5rem 1rem;
+        border-radius: 10px;
+        display: inline-block;
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="logo">
+      <img src="/images/logo-removebg-preview.png" alt="Smol File Logo" />
+    </div>
+
+    <div class="taglines" id="tagline">Make it smol. Send it fast.</div>
+
+    <div class="input-container">
+      <input
+        type="text"
+        id="videoUrl"
+        placeholder="Paste your video link here ✨"
+      />
+      <button onclick="compressVideo()">Make it Smol ✨</button>
+    </div>
+
+    <div class="progress" style="display: none">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="message" id="message"></div>
+    <div id="downloadSection"></div>
+
+    <script>
+      const taglines = [
+        "Make it smol. Send it fast.",
+        "Smash 50MB into 10MB. Smol magic.",
+        "From chunky to chibi.",
+        "Because size does matter.",
+        "Make your file smol and cute like you.",
+      ];
+
+      let taglineIndex = 0;
+      setInterval(() => {
+        taglineIndex = (taglineIndex + 1) % taglines.length;
+        document.getElementById("tagline").innerText = taglines[taglineIndex];
+      }, 4000);
+
+      function compressVideo() {
+        const url = document.getElementById("videoUrl").value;
+        const progress = document.querySelector(".progress");
+        const progressBar = document.getElementById("progressBar");
+        const message = document.getElementById("message");
+        const downloadSection = document.getElementById("downloadSection");
+
+        if (!url) {
+          alert("Please enter a video URL!");
+          return;
+        }
+
+        if (url.includes("youtube.com") || url.includes("youtu.be")) {
+          alert(
+            "YouTube is currently unsupported. Try Instagram, Twitter, or Reddit instead."
+          );
+          return;
+        }
+
+        progress.style.display = "block";
+        progressBar.style.width = "10%";
+        message.innerText = "Downloading... 🍿";
+        downloadSection.innerHTML = "";
+
+        const formData = new FormData();
+        formData.append("url", url);
+
+        fetch("https://smol-file-site-backend.onrender.com/compress", {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => {
+            if (!response.ok) throw new Error("Compression failed");
+            progressBar.style.width = "75%";
+            message.innerText = "Making it smol... 🔧✨";
+            return response.blob();
+          })
+          .then((blob) => {
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = "smol_file.mp4";
+            link.className = "download-link";
+            link.innerText = "✨ Download your smol file ✨";
+            downloadSection.appendChild(link);
+            progressBar.style.width = "100%";
+            message.innerText = "Done! Your smol file is ready 🎁";
+          })
+          .catch((error) => {
+            console.error("Compression error:", error); // helpful for debugging
+            progressBar.style.width = "0%";
+            message.innerText = "Something went wrong. Please try again.";
+          });
+      }
+    </script>
+    <div style="margin-top: 2rem">
+      <a
+        href="https://ko-fi.com/smolfile"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img
+          src="https://storage.ko-fi.com/cdn/kofi5.png?v=3"
+          alt="Buy Me a Bubble Tea"
+          style="height: 45px; border-radius: 12px"
+        />
+      </a>
+    </div>
+    <section
+      class="landing-text"
+      style="
+        max-width: 500px;
+        text-align: center;
+        margin-top: 1.5rem;
+        color: #555;
+      "
+    >
+      <h2 style="color: #c6baff">Why Smol File Exists</h2>
+      <p>
+        Discord’s 10MB file upload limit can be frustrating, especially if you
+        don’t have Nitro. Whether you’re sharing memes, clips, or screen
+        recordings, Smol File helps you shrink videos from Instagram, Youtube,
+        Twitter/X, or Reddit into cute, smol, Discord-friendly files — with no
+        paywall, no install, and no catch.
+      </p>
+    </section>
+  </body>
+</html>
