@@ -4,7 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Smol File</title>
-
+    <link
+      rel="icon"
+      href="/smolfile-frontend/images/logo-removebg-preview.png"
+      type="image/png"
+    />
     <!-- SEO Meta Tags -->
     <meta
       name="description"
@@ -195,7 +199,7 @@
         id="videoUrl"
         placeholder="Paste your video link here ✨"
       />
-      <button onclick="compressVideo()">Make it Smol ✨</button>
+      <button id="compressBtn">Make it Smol ✨</button>
     </div>
 
     <div class="progress" style="display: none">
@@ -205,7 +209,7 @@
     <div id="downloadSection"></div>
 
     <!-- at the bottom of your body (just before </body>) -->
-    <script src="/smolfile-frontend/compress.js"></script>
+    <script src="/smolfile-frontend/compress.js" defer></script>
 
     <div style="margin-top: 2rem">
       <a
