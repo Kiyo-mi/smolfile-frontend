@@ -43,8 +43,18 @@ function compressVideo() {
     method: "POST",
     body: formData,
   })
-    .then((response) => {
-      if (!response.ok) throw new Error("Compression failed");
+    .then(async (response) => {
+      if (!response.ok) {
+        // Try to parse the JSON error message
+        let errMsg = "Compression failed";
+        try {
+          const errJson = await response.json();
+          errMsg = errJson.error || errMsg;
+        } catch (e) {
+          // parsing failed, keep the generic error
+        }
+        throw new Error(errMsg);
+      }
       progressBar.style.width = "75%";
       message.innerText = "Making it smol... 🔧✨";
       return response.blob();
@@ -61,13 +71,14 @@ function compressVideo() {
       message.innerText = "Done! Your smol file is ready 🎁";
     })
     .catch((error) => {
-      console.error("Compression error:", error); // helpful for debugging
+      console.error("Compression error:", error);
       progressBar.style.width = "0%";
-      message.innerText = "Something went wrong. Please try again.";
+      // Display the specific error message
+      message.innerText = error.message;
     });
+  document.addEventListener("DOMContentLoaded", () => {
+    document
+      .getElementById("compressBtn")
+      .addEventListener("click", compressVideo);
+  });
 }
-document.addEventListener("DOMContentLoaded", () => {
-  document
-    .getElementById("compressBtn")
-    .addEventListener("click", compressVideo);
-});
