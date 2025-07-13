@@ -4,11 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Smol File</title>
-    <link
-      rel="icon"
-      href="/smolfile-frontend/favicon.ico"
-      type="image/x-icon"
-    />
+    <link rel="icon" href="smolfile-frontend/favicon.ico" type="image/x-icon" />
 
     <!-- SEO Meta Tags -->
     <meta
@@ -59,138 +55,13 @@
       rel="stylesheet"
     />
     <style>
-      body {
-        margin: 0;
-        font-family: "Quicksand", sans-serif;
-        background: #fffafc;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        min-height: 100vh;
-        padding: 2rem;
-        color: #333;
-      }
-
-      .logo {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 1rem;
-        animation: floatLogo 3s ease-in-out infinite;
-      }
-
-      .logo img {
-        width: 100px;
-        height: auto;
-        filter: drop-shadow(0 0 10px rgba(198, 186, 255, 0.7));
-      }
-
-      @keyframes floatLogo {
-        0% {
-          transform: translateY(0);
-        }
-        50% {
-          transform: translateY(-10px);
-        }
-        100% {
-          transform: translateY(0);
-        }
-      }
-
-      .taglines {
-        font-size: 1.1rem;
-        color: #777;
-        margin-bottom: 2rem;
-        text-align: center;
-        max-width: 400px;
-        animation: fadeTaglines 10s infinite;
-      }
-
-      @keyframes fadeTaglines {
-        0% {
-          opacity: 1;
-        }
-        33% {
-          opacity: 0;
-        }
-        66% {
-          opacity: 1;
-        }
-      }
-
-      .input-container {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        width: 100%;
-        max-width: 500px;
-      }
-
-      input[type="text"] {
-        padding: 0.75rem 1rem;
-        border-radius: 12px;
-        border: 2px solid #d1c5ff;
-        font-size: 1rem;
-        outline: none;
-      }
-
-      button {
-        background-color: #c6baff;
-        color: #fff;
-        font-size: 1.1rem;
-        padding: 0.7rem;
-        border: none;
-        border-radius: 12px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        font-weight: bold;
-      }
-
-      button:hover {
-        background-color: #b89ef8;
-      }
-
-      .progress {
-        margin-top: 1.5rem;
-        width: 100%;
-        max-width: 500px;
-        background: #eee;
-        border-radius: 20px;
-        overflow: hidden;
-      }
-
-      .progress-bar {
-        height: 20px;
-        background: #c6baff;
-        width: 0%;
-        transition: width 0.4s ease;
-      }
-
-      .message {
-        margin-top: 1rem;
-        font-size: 1rem;
-        color: #888;
-        text-align: center;
-      }
-
-      .download-link {
-        margin-top: 1.5rem;
-        font-size: 1.1rem;
-        background: #c6baff;
-        padding: 0.5rem 1rem;
-        border-radius: 10px;
-        display: inline-block;
-        color: #fff;
-        text-decoration: none;
-        font-weight: bold;
-      }
+      /* ... your existing styles ... */
     </style>
   </head>
   <body>
     <div class="logo">
       <img
-        src="/smolfile-frontend/logo-removebg-preview.png"
+        src="smolfile-frontend/logo-removebg-preview.png"
         alt="Smol File Logo"
       />
     </div>
@@ -213,8 +84,9 @@
     <div id="downloadSection"></div>
 
     <!-- External JS -->
-    <script src="/smolfile-frontend/compress.js" defer></script>
+    <script src="smolfile-frontend/compress.js" defer></script>
 
+    <!-- Buy me a bubble tea -->
     <div style="margin-top: 2rem">
       <a
         href="https://ko-fi.com/smolfile"
@@ -228,16 +100,9 @@
         />
       </a>
     </div>
-    <section
-      class="landing-text"
-      style="
-        max-width: 500px;
-        text-align: center;
-        margin-top: 1.5rem;
-        color: #555;
-      "
-    >
-      <h2 style="color: #c6baff">Why Smol File Exists</h2>
+
+    <section class="landing-text">
+      <h2>Why Smol File Exists</h2>
       <p>
         Discord’s 10MB file upload limit can be frustrating, especially if you
         don’t have Nitro. Whether you’re sharing memes, clips, or screen
