@@ -45,14 +45,11 @@ function compressVideo() {
   })
     .then(async (response) => {
       if (!response.ok) {
-        // Try to parse the JSON error message
         let errMsg = "Compression failed";
         try {
           const errJson = await response.json();
           errMsg = errJson.error || errMsg;
-        } catch (e) {
-          // parsing failed, keep the generic error
-        }
+        } catch (e) {}
         throw new Error(errMsg);
       }
       progressBar.style.width = "75%";
@@ -73,12 +70,12 @@ function compressVideo() {
     .catch((error) => {
       console.error("Compression error:", error);
       progressBar.style.width = "0%";
-      // Display the specific error message
       message.innerText = error.message;
     });
-  document.addEventListener("DOMContentLoaded", () => {
-    document
-      .getElementById("compressBtn")
-      .addEventListener("click", compressVideo);
-  });
 }
+
+// Bind the button click after DOM content loads
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("compressBtn");
+  if (btn) btn.addEventListener("click", compressVideo);
+});
